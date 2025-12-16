@@ -23,6 +23,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final UserService userService;
 
     @Override
+    // 콜백메스라서 클래스 없음 여기에 주의 ! warning!(민아)
+    // 로그인 성공시 자동으로 실행되는 메서드라 사용되는 위치 찾을 수 없음( 콜백 메서드 )
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         System.out.println(authentication);
 //        DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();

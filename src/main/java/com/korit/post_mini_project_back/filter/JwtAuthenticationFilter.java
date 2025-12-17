@@ -26,7 +26,7 @@ import java.util.Map;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
-//    private final UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         int userId = jwtTokenProvider.getUserId(accessToken);
-        User foundUser = null;
+        User foundUser = userMapper.findByUserId(userId);
 
         if (foundUser == null) {
             filterChain.doFilter(request, response);
@@ -52,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         Collection<? extends GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(foundUser.getRole()));
-        PrincipalUser principalUser = new PrincipalUser(authorities, Map.of("id", foundUser.getOauth2Id()), "", foundUser);
+        PrincipalUser principalUser = new PrincipalUser(authorities, Map.of("id", foundUser.getOauth2Id()), "id", foundUser);
         String password = "";
 
         UsernamePasswordAuthenticationToken authenticationToken =

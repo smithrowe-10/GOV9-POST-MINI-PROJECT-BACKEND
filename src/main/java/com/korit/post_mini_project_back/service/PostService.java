@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,9 @@ public class PostService {
         List<ImageFile> files = fileService.upload("post", dto.getFiles());
         Post post = dto.toEntity();
         postMapper.insert(post);
+        if (Objects.isNull(files)) {
+            return;
+        }
         files.forEach(file -> file.setReferenceId(post.getPostId()));
         imageFileMapper.insertToMany(files);
     }

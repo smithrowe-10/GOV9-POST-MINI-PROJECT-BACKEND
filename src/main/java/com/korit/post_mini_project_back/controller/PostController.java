@@ -5,10 +5,7 @@ import com.korit.post_mini_project_back.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
                 // URL에 자원의 이름을 쓰기 REST API 규칙
@@ -23,6 +20,11 @@ public class PostController {
     public ResponseEntity<?> createPost(@ModelAttribute CreatePostReqDto dto) {
         System.out.println(dto);
         postService.createPost(dto);
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/feeds")
+    public ResponseEntity<?> getFeedList() {
         return ResponseEntity.ok(null);
     }
 

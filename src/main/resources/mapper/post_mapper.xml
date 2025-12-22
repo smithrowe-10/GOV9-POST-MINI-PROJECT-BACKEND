@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.korit.post_mini_project_back.mapper.PostMapper">
+    <resultMap id="postResultMap" type="post">
+
+    </resultMap>
+    <resultMap id="userResultMap" type="user">
+
+    </resultMap>
+    <resultMap id="imageFileResultMap" type="imageFile">
+
+    </resultMap>
+    <resultMap id="followResultMap" type="follow">
+
+    </resultMap>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="postId">
         insert into post_tb
         values (default, #{content}, #{visibility}, #{userId}, now())
     </insert>
+    <select id="getFeeds" resultMap="postResultMap">
 
+    </select>
 </mapper>

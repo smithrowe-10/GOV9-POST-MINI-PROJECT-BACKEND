@@ -10,7 +10,8 @@ import java.util.List;
 public interface PostMapper {
     int insert(Post post);
     List<Post> getFeeds(
-            @Param("currentPage") int currentPage,
+            @Param("startIndex") int startIndex,
             @Param("size") int size,
             @Param("userId") int userId);
+    int getTotalCount(@Param("userId") int userId);
 }

@@ -60,13 +60,23 @@
             on
                 ft.following_id = pt.user_id
         where
-            ft.follower_id = 1
-            limit 10, 10)
+            ft.follower_id = #{userId}
+            limit #{startIndex}, #{size})
 
         select
             *
         from
             temp_post_tb tpt
             left outer join image_file_tb ift on ift.reference_id = tpt.post_id and ift.category = 'post';
+    </select>
+    <select id="getTotalCount" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            post_tb pt
+            left outer join follow_tb ft on ft.following_id = pt.user_id
+        where
+            ft.follower_id = #{userId};
+
     </select>
 </mapper>

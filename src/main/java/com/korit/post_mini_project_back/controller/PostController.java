@@ -1,6 +1,7 @@
 package com.korit.post_mini_project_back.controller;
 
 import com.korit.post_mini_project_back.dto.request.CreatePostReqDto;
+import com.korit.post_mini_project_back.dto.request.GetFeedListReqDto;
 import com.korit.post_mini_project_back.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,8 +25,8 @@ public class PostController {
     }
 
     @GetMapping("/feeds")
-    public ResponseEntity<?> getFeedList() {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<?> getFeedList(GetFeedListReqDto dto) {
+        return ResponseEntity.ok(postService.getFeeds(dto));
     }
 
 }
